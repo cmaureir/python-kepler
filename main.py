@@ -35,23 +35,26 @@ if __name__ == "__main__":
     time = 0
 
     ## Example case for hyperbola
-    #a = -1.0
-    #e = 1.5
+    a = -1.0
+    e = 1.5
 
     ## Example case for ellipse
-    a = 1
-    e = 0.5
+    #a = 1
+    #e = 0.5
 
     m = 1000
     r,v = get_pos_vel_from_orb_elem(a, e, m)
+    print r,v, m
 
     kp = KeplerianOrbit(r,v,m)
 
     while time < MAX_TIME:
         kp.calculate_orbital_elements()
-        #kp.print_oe()
+        kp.print_oe()
+        raw_input()
         if e < 1:
             kp.get_elliptical_pos_vel(time)
+            print kp.r
         else:
             kp.get_hyperbolic_pos_vel(time)
         kp.print_log(time)
